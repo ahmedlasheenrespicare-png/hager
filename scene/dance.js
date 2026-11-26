@@ -118,14 +118,13 @@ const PIV_X = 500, PIV_Y = 310;
 function warpDance(t) {
   const phi = 2 * Math.PI * (t - BEAT0) / BEAT;
   const bp = beatPulse(t);
-  const groove = Math.sin(phi * 0.5);
-  const groove2 = Math.sin(phi * 0.25 + 0.7);
-  const raise = Math.pow(Math.max(0, Math.sin(phi * 0.25)), 2);
-  const sway = 0.042 * groove + 0.016 * groove2;
-  const bob = 0.026 * bp + 0.008 * Math.sin(phi * 0.5);
-  const headA = 0.085 * Math.sin(phi * 0.5 + 0.5) + 0.04 * groove2;
-  const headNod = 0.028 * bp + 0.009 * Math.sin(phi);
-  const armAmp = 0.068;
+  const lean = Math.sin(phi * 0.5);                 // side-to-side groove (2-beat period)
+  const lean2 = Math.sin(phi * 0.25 + 0.6);
+  const open = Math.pow(Math.max(0, Math.sin(phi * 0.125)), 2); // arms-open gesture every 8 beats
+  const sway = 0.05 * lean + 0.02 * lean2;
+  const bob = 0.024 * bp + 0.007 * Math.sin(phi * 0.5);
+  const headA = 0.09 * lean + 0.04 * lean2 + 0.065 * open;   // head tilts WITH the lean, lifts on open
+  const headNod = 0.024 * bp + 0.01 * Math.sin(phi) - 0.035 * open;
   const breathe = Math.sin(t * 1.4 + 0.5);
   const arr = posAttr.array;
   for (let i = 0; i < VN; i++) {
@@ -135,11 +134,11 @@ function warpDance(t) {
     dy += 0.004 * breathe * wTorso[i];
     dx += (px - 512) * 0.00002 * breathe * wTorso[i];
     dx += 0.008 * Math.sin(t * 1.2 + py * 0.008) * wDrape[i];
-    const aL = armAmp * (0.66 * Math.cos(phi) + 0.65 * raise);
-    const aR = armAmp * (0.66 * Math.cos(phi + Math.PI) + 0.65 * raise);
-    dy += aL * wArmL[i] + aR * wArmR[i];
-    const swing = armAmp * 0.35 * (0.5 + 0.5 * groove);
-    dx += -swing * wArmL[i] + swing * wArmR[i];
+    // arms: subtle alternating groove + periodic "welcome" open (spread out + up)
+    const grooveArm = 0.02 * Math.sin(phi + (px < 512 ? 0 : Math.PI));
+    dy += grooveArm * (wArmL[i] + wArmR[i]);
+    dy += open * 0.08 * (wArmL[i] + wArmR[i]);
+    dx += -open * 0.095 * wArmL[i] + open * 0.095 * wArmR[i];
     const hw = wHead[i];
     if (hw > 0.001) {
       const a = headA * hw;
@@ -213,18 +212,20 @@ function renderFrame(t) {
   t = clamp(t, 0, DUR);
   const phi = 2 * Math.PI * (t - BEAT0) / BEAT;
   const bp = beatPulse(t);
-  const groove = Math.sin(phi * 0.5);
+  const lean = Math.sin(phi * 0.5);
+  const open = Math.pow(Math.max(0, Math.sin(phi * 0.125)), 2);
 
   warpDance(t);
-  setLeg(legL, HIP_L, 0.045 * Math.sin(phi * 0.5));
-  setLeg(legR, HIP_R, -0.045 * Math.sin(phi * 0.5));
+  setLeg(legL, HIP_L, 0.05 * lean);
+  setLeg(legR, HIP_R, -0.05 * lean);
 
-  figure.position.z = 0.3 + 0.04 * Math.sin(phi * 0.25);
-  figure.scale.setScalar(1 + 0.015 * bp);
-  figure.position.x = 0.07 * groove;
-  figure.position.y = -0.028 * bp;
-  figure.rotation.y = 0.06 * groove;
-  figure.rotation.z = 0.045 * groove + 0.012 * Math.sin(phi * 0.5);
+  figure.position.z = 0.3 + 0.04 * Math.sin(phi * 0.125);
+  figure.scale.setScalar(1 + 0.015 * bp + 0.01 * open);
+  figure.position.x = 0.09 * lean;
+  figure.position.y = -0.026 * bp + 0.02 * open;
+  figure.rotation.y = 0.07 * lean;
+  figure.rotation.z = 0.055 * lean + 0.012 * Math.sin(phi * 0.5);
+  figure.rotation.x = -0.05 * open;
 
   sparkles.rotation.z = t * 0.03;
   const burst = Math.exp(-Math.pow(t - 10.4, 2) * 2) + 0.7 * Math.exp(-Math.pow(t - 17.2, 2) * 2);
