@@ -1,11 +1,12 @@
 # Builds the dashboard, adds the LDEC 3D maquettes site under /ldec/,
 # and deploys both to GitHub Pages automatically.
-# Trigger: pushes to main or the Arena working branch (or manually).
+# Trigger: every push to main (or manually from the Actions tab).
+# Note: the github-pages environment only allows deployments from main.
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main, arena/534da059-hager]
+    branches: [main]
   workflow_dispatch:
 
 # Permissions required by the official Pages deploy actions
