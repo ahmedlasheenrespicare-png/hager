@@ -1,5 +1,7 @@
-# Builds the dashboard and deploys it to GitHub Pages automatically.
+# Builds the dashboard, adds the LDEC 3D maquettes site under /ldec/,
+# and deploys both to GitHub Pages automatically.
 # Trigger: every push to main (or manually from the Actions tab).
+# Note: the github-pages environment only allows deployments from main.
 name: Deploy to GitHub Pages
 
 on:
@@ -37,6 +39,18 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Add LDEC 3D maquettes site
+        run: |
+          mkdir -p dist/ldec/assets
+          cp scene/ldec-3d.html dist/ldec/index.html
+          cp scene/ldec-3d.html dist/ldec/ldec-3d.html
+          cp scene/ldec3d.js scene/ldec3d.css dist/ldec/
+          cp scene/ldec-3d-standalone.html dist/ldec/standalone.html
+          cp scene/ldec-gallery.html scene/ldec-models-gallery.html dist/ldec/
+          cp -r scene/vendor dist/ldec/vendor
+          cp -r scene/assets/fonts dist/ldec/assets/fonts
+          cp scene/assets/ldec-* dist/ldec/assets/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

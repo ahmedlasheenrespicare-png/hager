@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مجسم هاجر — مشهد ثلاثي الأبعاد</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./vendor/three.module.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="stage"></canvas>
+
+      <!-- Loading -->
+      <div id="loader">
+        <div class="spinner"></div>
+        <p>جارٍ تجهيز المجسم… ✨</p>
+      </div>
+
+      <!-- Title -->
+      <header class="glass title-card">
+        <h1>✨ مجسم هاجر</h1>
+        <p>مشهد ثلاثي الأبعاد تفاعلي — مستوحى من الصورة</p>
+      </header>
+
+      <!-- Hint -->
+      <div class="glass hint" id="hint">
+        🖱️ اسحب للتدوير · قرّب بعجلة الفأرة · باللمس: إصبع للتدوير وإصبعان للتقريب
+      </div>
+
+      <!-- Reference images card -->
+      <button class="glass thumb-card" id="thumbBtn" title="عرض الصور المرجعية">
+        <img src="./assets/hager-3d.png" alt="المجسم ثلاثي الأبعاد" />
+        <span>الصور المرجعية 🖼️</span>
+      </button>
+
+      <!-- Toolbar -->
+      <nav class="glass toolbar">
+        <button id="rotateBtn" class="tool active" title="تشغيل/إيقاف الدوران التلقائي">
+          <span class="ico">🔄</span><span class="lbl">دوران تلقائي</span>
+        </button>
+        <button id="themeBtn" class="tool" title="تغيير ألوان المشهد">
+          <span class="ico">🎨</span><span class="lbl">الخلفية</span>
+        </button>
+        <button id="frameBtn" class="tool active" title="إظهار/إخفاء إطار الصورة الأصلية">
+          <span class="ico">🖼️</span><span class="lbl">إطار الصورة</span>
+        </button>
+        <button id="resetBtn" class="tool" title="إعادة ضبط الكاميرا">
+          <span class="ico">🎯</span><span class="lbl">إعادة الضبط</span>
+        </button>
+        <button id="shotBtn" class="tool primary" title="حفظ لقطة PNG من المشهد">
+          <span class="ico">📷</span><span class="lbl">حفظ لقطة</span>
+        </button>
+        <a class="tool" href="./video.html" title="شاهد فيديو الفلوج ثلاثي الأبعاد" style="text-decoration: none">
+          <span class="ico">🎬</span><span class="lbl">الفلوج</span>
+        </a>
+        <a class="tool" href="./live.html" title="الصورة المجسمة وهي حية بتتحرك" style="text-decoration: none">
+          <span class="ico">✨</span><span class="lbl">الصورة الحية</span>
+        </a>
+        <label class="name-field" title="الاسم المكتوب على قاعدة المجسم">
+          <span class="ico">✍️</span>
+          <input id="nameInput" type="text" value="Hager" maxlength="24" placeholder="الاسم على القاعدة" />
+        </label>
+      </nav>
+
+      <!-- Lightbox -->
+      <div id="lightbox" hidden>
+        <div class="lb-backdrop" data-close></div>
+        <div class="lb-panel glass">
+          <button class="lb-close" data-close title="إغلاق">✕</button>
+          <h2>الصور المرجعية</h2>
+          <div class="lb-grid">
+            <figure>
+              <img src="./assets/hager-3d.png" alt="المجسم ثلاثي الأبعاد" />
+              <figcaption>المجسم ثلاثي الأبعاد ✨</figcaption>
+            </figure>
+            <figure>
+              <img src="./assets/photo.jpg" alt="الصورة الأصلية" />
+              <figcaption>الصورة الأصلية 📷</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div id="toast" hidden></div>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>مشاهد روكا — اختار مشهد</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Segoe UI", Tahoma, sans-serif; background: linear-gradient(160deg, #1b1230, #2d1b3e 60%, #1a1026); color: #fff; min-height: 100vh; padding: 28px 16px 60px; }
+  h1 { text-align: center; font-size: 1.7rem; margin-bottom: 6px; }
+  p.sub { text-align: center; opacity: 0.75; margin-bottom: 26px; font-size: 0.95rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; max-width: 1350px; margin: 0 auto; }
+  .card { position: relative; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 18px; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 14px 34px rgba(0,0,0,0.45); }
+  .card img { width: 100%; aspect-ratio: 9/16; object-fit: cover; display: block; }
+  .num { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #ff2b74, #b12bff); display: flex; align-items: center; justify-content: center; font-size: 1.35rem; font-weight: 800; box-shadow: 0 4px 14px rgba(0,0,0,0.5); }
+  .cap { padding: 12px 14px 14px; text-align: center; font-weight: 700; font-size: 1rem; }
+  .cap small { display: block; font-weight: 400; opacity: 0.7; margin-top: 3px; font-size: 0.8rem; }
+  .note { text-align: center; margin-top: 30px; font-size: 1rem; opacity: 0.9; }
+  .note b { color: #ff7ab0; }
+</style>
+</head>
+<body>
+  <h1>✨ مشاهد روكا الخمسة</h1>
+  <p class="sub">نفس الشخصية بخمس أجواء مختلفة — اختار رقم المشهد اللي يعجبك</p>
+  <div class="grid">
+    <div class="card"><div class="num">1</div><img src="./assets/roka-scene-1-bridge.png" alt="كوبري الليل"><div class="cap">كوبري الليل بالنيون<small>نفس أجواء الصورة الأصلية</small></div></div>
+    <div class="card"><div class="num">2</div><img src="./assets/roka-scene-2-figurine.png" alt="مجسم"><div class="cap">مجسم على قاعدة رخام<small>ستايل الفيورين الذهبي — ROKA</small></div></div>
+    <div class="card"><div class="num">3</div><img src="./assets/roka-scene-3-sunset.png" alt="غروب"><div class="cap">غروب على سطح المدينة<small>ضوء ذهبي دافئ</small></div></div>
+    <div class="card"><div class="num">4</div><img src="./assets/roka-scene-4-beach.png" alt="شاطئ"><div class="cap">شاطئ البحر وقت الغروب<small>سماء بنفسجية وموج هادي</small></div></div>
+    <div class="card"><div class="num">5</div><img src="./assets/roka-scene-5-neon.png" alt="شارع نيون"><div class="cap">شارع النيون الليلي<small>أجواء عصرية وألوان جريئة</small></div></div>
+  </div>
+  <p class="note">قولي في الشات: <b>رقم المشهد</b> اللي اخترته وأنا أكمّل عليه 💛</p>
+</body>
+</html>

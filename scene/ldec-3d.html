@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ماكيتات LDEC — مجسم ثلاثي الأبعاد تفاعلي</title>
+    <link rel="stylesheet" href="./ldec3d.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./vendor/three.module.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="stage"></canvas>
+
+      <div id="loader">
+        <div class="spinner"></div>
+        <p>جارٍ بناء الماكيتات ثلاثية الأبعاد…</p>
+      </div>
+
+      <header class="glass title-card">
+        <h1>ماكيتات LASHEEN — LDEC</h1>
+        <p>مجسم ثلاثي الأبعاد تفاعلي · زوم لأقرب تفصيلة بجودة عالية</p>
+      </header>
+
+      <div class="glass hint" id="hint">
+        اسحب للتدوير · عجلة الفأرة أو إصبعان للزوم · زر يمين للتحريك · دبل كليك على أي جزء للتركيز عليه
+      </div>
+
+      <nav class="glass viewbar">
+        <button class="view active" data-view="both">المشهدان معًا</button>
+        <button class="view" data-view="tower">برج الشركة</button>
+        <button class="view" data-view="site">موقع البناء</button>
+        <button class="view" data-view="logo">اللوجو عن قرب</button>
+        <button class="view" data-view="crane">الرافعة عن قرب</button>
+      </nav>
+
+      <nav class="glass toolbar">
+        <button id="zoomInBtn" class="tool" title="تقريب">
+          <span class="ico">＋</span><span class="lbl">زوم داخل</span>
+        </button>
+        <button id="zoomOutBtn" class="tool" title="إبعاد">
+          <span class="ico">－</span><span class="lbl">زوم خارج</span>
+        </button>
+        <button id="rotateBtn" class="tool active" title="تشغيل/إيقاف الدوران التلقائي">
+          <span class="ico">⟳</span><span class="lbl">دوران تلقائي</span>
+        </button>
+        <button id="resetBtn" class="tool" title="إعادة ضبط الكاميرا">
+          <span class="ico">◎</span><span class="lbl">إعادة الضبط</span>
+        </button>
+        <button id="shotBtn" class="tool primary" title="حفظ لقطة PNG بدقة مضاعفة">
+          <span class="ico">📷</span><span class="lbl">لقطة عالية الدقة</span>
+        </button>
+        <a class="tool" href="./ldec-models-gallery.html" title="صور الماكيتات المرجعية">
+          <span class="ico">🖼</span><span class="lbl">الصور المرجعية</span>
+        </a>
+      </nav>
+
+      <div id="toast" hidden></div>
+    </div>
+
+    <script type="module" src="./ldec3d.js"></script>
+  </body>
+</html>
